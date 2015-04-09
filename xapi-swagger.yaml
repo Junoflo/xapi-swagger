@@ -1,0 +1,1168 @@
+swagger: "2.0"
+info:
+  version: 1.0.2
+  title: xAPI Specification
+host: "example.com:8001"
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /activities:
+    get:
+      description: 'Retrieves Document Activity. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#full-activity-object-get'
+      tags:
+        - Activity
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "413":
+          description: Request Entity Too Large
+        "500":
+          description: Internal Server Error
+  /activities/profile:
+    delete:
+      description: 'Removes Document Activity Profile. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#75-activity-profile-api'
+      tags:
+        - Activity
+        - Profile
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+        - name: profileId
+          in: query
+          description: ID of profile
+          required: true
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+    get:
+      description: 'Retrieves Document Activity Profile. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#75-activity-profile-api'
+      tags:
+        - Activity
+        - Profile
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+        - name: profileId
+          in: query
+          description: ID of profile
+          type: string
+        - name: since
+          in: query
+          description: After timestamp (converted)
+          type: string
+      responses:
+        "200":
+          description: Successful
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "413":
+          description: Request Entity Too Large
+        "500":
+          description: Internal Server Error
+    post:
+      description: 'Stores/Updates Document Activity Profile. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#75-activity-profile-api'
+      tags:
+        - Activity
+        - Profile
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+        - name: profileId
+          in: query
+          description: ID of profile
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Content to be persisted/updated
+          required: true
+          schema:
+            $ref: "#/definitions/Content"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "409":
+          description: Conflict
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Internal Server Error
+    put:
+      description: 'Stores Document Activity Profile. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#75-activity-profile-api'
+      tags:
+        - Activity
+        - Profile
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+        - name: profileId
+          in: query
+          description: ID of profile
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Content to be persisted
+          required: true
+          schema:
+            $ref: "#/definitions/Content"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Internal Server Error
+  /activities/state:
+    delete:
+      description: 'Removes Document Activity State. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#74-state-api'
+      tags:
+        - State
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+        - name: registration
+          in: query
+          description: ID of registration
+          type: string
+        - name: stateId
+          in: query
+          description: ID of state
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+    get:
+      description: 'Retrieves Document Activity State. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#74-state-api'
+      tags:
+        - State
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+        - name: registration
+          in: query
+          description: ID of registration
+          type: string
+        - name: stateId
+          in: query
+          description: ID of state
+          type: string
+        - name: since
+          in: query
+          description: After timestamp (converted)
+          type: string
+      responses:
+        "200":
+          description: Successful
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "413":
+          description: Request Entity Too Large
+        "500":
+          description: Internal Server Error
+    post:
+      description: 'Stores/Updates Document Activity State. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#74-state-api'
+      tags:
+        - State
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+        - name: registration
+          in: query
+          description: ID of registration
+          type: string
+        - name: stateId
+          in: query
+          description: ID of state
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Content to be persisted/updated
+          required: true
+          schema:
+            $ref: "#/definitions/Content"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Internal Server Error
+    put:
+      description: 'Stores Document Activity State. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#74-state-api'
+      tags:
+        - State
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: activityId
+          in: query
+          description: ID of activity
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+        - name: registration
+          in: query
+          description: ID of registration
+          type: string
+        - name: stateId
+          in: query
+          description: ID of state
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Content to be persisted
+          required: true
+          schema:
+            $ref: "#/definitions/Content"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Internal Server Error
+  /agents:
+    get:
+      description: 'Retrieves Document Agent. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#combined-information-get'
+      tags:
+        - Agents
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+      responses:
+        "200":
+          description: Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "413":
+          description: Request Entity Too Large
+        "500":
+          description: Internal Server Error
+  /agents/profile:
+    delete:
+      description: ' Removes Document Agent Profile. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#76-agent-profile-api'
+      tags:
+        - Agents
+        - Profile
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+        - name: profileId
+          in: query
+          description: ID of profile
+          required: true
+          type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+    get:
+      description: 'Retrieves Document Agent Profile. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#76-agent-profile-api'
+      tags:
+        - Agents
+        - Profile
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+        - name: profileId
+          in: query
+          description: ID of profile
+          type: string
+        - name: since
+          in: query
+          description: After timestamp (converted)
+          type: string
+      responses:
+        "200":
+          description: Successful
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "413":
+          description: Request Entity Too Large
+        "500":
+          description: Internal Server Error
+    post:
+      description: 'Stores/Updates Document Agent Profile. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#76-agent-profile-api'
+      tags:
+        - Agents
+        - Profile
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+        - name: profileId
+          in: query
+          description: ID of profile
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Content to be persisted/updated
+          required: true
+          schema:
+            $ref: "#/definitions/Content"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Internal Server Error
+    put:
+      description: 'Stores Document Agent Profile. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#76-agent-profile-api'
+      tags:
+        - Agents
+        - Profile
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          required: true
+          # type: object not supported
+          type: string
+        - name: profileId
+          in: query
+          description: ID of profile
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Content to be persisted
+          required: true
+          schema:
+            $ref: "#/definitions/Content"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Internal Server Error
+  /statements:
+    get:
+      description: 'Retrieves statement(s) from the LRS. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#723-getstatements'
+      tags:
+        - Statement
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: statementId
+          in: query
+          description: ID of statement
+          type: string
+        - name: voidedStatementId
+          in: query
+          description: ID of voided statement
+          type: string
+        - name: agent
+          in: query
+          description: Agent or identified group (stringified JSON)
+          # type: object not supported
+          type: string
+        - name: verb
+          in: query
+          description: ID of verb
+          type: string
+        - name: activity
+          in: query
+          description: ID of activity
+          type: string
+        - name: registration
+          in: query
+          description: ID of registration
+          type: string
+        - name: related_activities
+          in: query
+          description: Search in related activities
+          type: boolean
+        - name: related_agents
+          in: query
+          description: Search in related agents
+          type: boolean
+        - name: since
+          in: query
+          description: After timestamp (converted)
+          type: string
+        - name: until
+          in: query
+          description: At or before timestamp (converted)
+          type: string
+        - name: limit
+          in: query
+          description: Maximum statements to return
+          type: integer
+        - name: format
+          in: query
+          description: Language filter
+          type: string
+        - name: attachments
+          in: query
+          description: Include attachments
+          type: boolean
+        - name: ascending
+          in: query
+          description: Sort statements by stored
+          type: boolean
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            $ref: "#/definitions/StatementResult"
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "413":
+          description: Request Entity Too Large
+        "500":
+          description: Internal Server Error
+    post:
+      description: 'Stores multiple statements into the LRS. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#722-poststatements'
+      tags:
+        - Statement
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Statements to be persisted
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Statement"
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            type: array
+            items:
+              type: string
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Internal Server Error
+    put:
+      description: 'Stores a single statement into the LRS with provided statementId parameter. https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#721-putstatements'
+      tags:
+        - Statement
+      parameters:
+        - name: X-Experience-API-Version
+          in: header
+          description: xAPI Version
+          required: true
+          type: string
+        - name: statementId
+          in: query
+          description: ID of statement
+          required: true
+          type: string
+        - name: body
+          in: body
+          description: Statement to be persisted
+          required: true
+          schema:
+            $ref: "#/definitions/StatementNoId"
+      responses:
+        "204":
+          description: Successful response
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+        "412":
+          description: Precondition Failed
+        "500":
+          description: Internal Server Error
+definitions:
+  Account:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#4124-account-object'
+    type: object
+    properties:
+      homePage:
+        type: string
+      name:
+        type: string
+    required:
+      - homePage
+      - name
+  Activity:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#4141-when-the-objecttype-is-activity'
+    type: object
+    properties:
+      objectType:
+        type: string
+        readOnly: true
+        default: Activity
+      id:
+        type: string
+      definition:
+        $ref: "#/definitions/Definition"
+    required:
+      - id
+  AgentGroup:
+    description: 'YAML 2.0 does not support oneOf so this is used when object can be an Agent or a Group.'
+    type: object
+    properties:
+      objectType:
+        type: string
+        enum:
+          - Agent
+          - Group
+      name:
+        type: string
+      mbox:
+        type: string
+      mbox_sha1sum:
+        type: string
+      openid:
+        type: string
+      account:
+        $ref: "#/definitions/Account"
+      member:
+        type: array
+        items:
+          $ref: "#/definitions/Agent"
+    required:
+      - objectType
+  Agent:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#4121-when-the-actor-objecttype-is-agent'
+    type: object
+    properties:
+      objectType:
+        type: string
+        readOnly: true
+        default: Agent
+      name:
+        type: string
+      mbox:
+        type: string
+      mbox_sha1sum:
+        type: string
+      openid:
+        type: string
+      account:
+        $ref: "#/definitions/Account"
+  Attachment:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#4111-attachments'
+    type: object
+    properties:
+      usageType:
+        type: string
+      display:
+        type: object
+        additionalProperties:
+          type: string
+      description:
+        type: object
+        additionalProperties:
+          type: string
+      contentType:
+        type: string
+      length:
+        type: integer
+        format: int64
+      sha2:
+        type: string
+      fileUrl:
+        type: string
+    required:
+      - usageType
+      - display
+      - contentType
+      - length
+      - sha2
+  Content:
+    description: 'This allows code generator to work because Swagger body must refer to an object.'
+    type: object
+    properties:
+      content:
+        type: string
+  Context:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#416-context'
+    type: object
+    properties:
+      registration:
+        type: string
+      instructor:
+        $ref: "#/definitions/AgentGroup"
+      team:
+        $ref: "#/definitions/Group"
+      contextActivities:
+        $ref: "#/definitions/ContextActivity"
+      revision:
+        type: string
+      platform:
+        type: string
+      language:
+        type: string
+      statement:
+        $ref: "#/definitions/StatementReference"
+      extensions:
+        type: object
+        additionalProperties:
+          type: string
+  ContextActivity:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#4162-contextactivities-property'
+    type: object
+    properties:
+      parent:
+        type: array
+        items:
+          $ref: "#/definitions/Activity"
+      grouping:
+        type: array
+        items:
+          $ref: "#/definitions/Activity"
+      category:
+        type: array
+        items:
+          $ref: "#/definitions/Activity"
+      other:
+        type: array
+        items:
+          $ref: "#/definitions/Activity"
+  Definition:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#activity-definition'
+    type: object
+    properties:
+      name:
+        type: object
+        additionalProperties:
+          type: string
+      description:
+        type: object
+        additionalProperties:
+          type: string
+      type:
+        type: string
+      moreInfo:
+        type: string
+      interactionType:
+        type: string
+      correctResponsesPattern:
+        type: array
+        items:
+          type: string
+      choices:
+        type: array
+        items:
+          $ref: "#/definitions/InteractionComponent"
+      scale:
+        type: array
+        items:
+          $ref: "#/definitions/InteractionComponent"
+      source:
+        type: array
+        items:
+          $ref: "#/definitions/InteractionComponent"
+      target:
+        type: array
+        items:
+          $ref: "#/definitions/InteractionComponent"
+      steps:
+        type: array
+        items:
+          $ref: "#/definitions/InteractionComponent"
+      extensions:
+        type: object
+        additionalProperties:
+          type: string
+  Group:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#4122-when-the-actor-objecttype-is-group'
+    type: object
+    properties:
+      objectType:
+        type: string
+        readOnly: true
+        default: Group
+      name:
+        type: string
+      mbox:
+        type: string
+      mbox_sha1sum:
+        type: string
+      openid:
+        type: string
+      account:
+        $ref: "#/definitions/Account"
+      member:
+        type: array
+        items:
+          $ref: "#/definitions/Agent"
+    required:
+      - objectType
+  InteractionComponent:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#interaction-components'
+    type: object
+    properties:
+      id:
+        type: string
+      description:
+        type: object
+        additionalProperties:
+          type: string
+    required:
+      - id
+  Result:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#415-result'
+    type: object
+    properties:
+      score:
+        $ref: "#/definitions/Score"
+      success:
+        type: boolean
+      completion:
+        type: boolean
+      response:
+        type: string
+      duration:
+        type: string
+      extensions:
+        type: object
+        additionalProperties:
+          type: string
+  Score:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#4151-score'
+    type: object
+    properties:
+      scaled:
+        type: number
+        format: double
+      raw:
+        type: number
+        format: double
+      min:
+        type: number
+        format: double
+      max:
+        type: number
+        format: double
+  Statement:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#41-statement-properties'
+    type: object
+    properties:
+      id:
+        type: string
+      actor:
+        $ref: "#/definitions/AgentGroup"
+      verb:
+        $ref: "#/definitions/Verb"
+      objectActivity:
+        $ref: "#/definitions/Activity"
+      objectAgentGroup:
+        $ref: "#/definitions/AgentGroup"
+      objectStatementReference:
+        $ref: "#/definitions/StatementReference"
+      objectSubStatement:
+        $ref: "#/definitions/SubStatement"
+      result:
+        $ref: "#/definitions/Result"
+      context:
+        $ref: "#/definitions/Context"
+      timestamp:
+        type: string
+        format: date-time
+      authority:
+        $ref: "#/definitions/AgentGroup"
+      version:
+        type: string
+      attachments:
+        type: array
+        items:
+          $ref: "#/definitions/Attachment"
+    required:
+      - actor
+      - verb
+      - objectActivity
+      - objectAgentGroup
+      - objectStatementReference
+      - objectSubStatement
+  StatementNoId:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#41-statement-properties'
+    type: object
+    properties:
+      actor:
+        $ref: "#/definitions/AgentGroup"
+      verb:
+        $ref: "#/definitions/Verb"
+      objectActivity:
+        $ref: "#/definitions/Activity"
+      objectAgentGroup:
+        $ref: "#/definitions/AgentGroup"
+      objectStatementReference:
+        $ref: "#/definitions/StatementReference"
+      objectSubStatement:
+        $ref: "#/definitions/SubStatement"
+      result:
+        $ref: "#/definitions/Result"
+      context:
+        $ref: "#/definitions/Context"
+      timestamp:
+        type: string
+        format: date-time
+      authority:
+        $ref: "#/definitions/AgentGroup"
+      version:
+        type: string
+      attachments:
+        type: array
+        items:
+          $ref: "#/definitions/Attachment"
+    required:
+      - actor
+      - verb
+      - objectActivity
+      - objectAgentGroup
+      - objectStatementReference
+      - objectSubStatement
+  StatementReference:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#statement-references'
+    type: object
+    properties:
+      objectType:
+        type: string
+        readOnly: true
+        default: StatementRef
+      id:
+        type: string
+    required:
+      - objectType
+      - id
+  StatementResult:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#42-retrieval-of-statements'
+    type: object
+    properties:
+      statements:
+        type: array
+        items:
+          $ref: "#/definitions/Statement"
+      more:
+        type: string
+    required:
+      - statements
+  SubStatement:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#sub-statements'
+    type: object
+    properties:
+      objectType:
+        type: string
+        readOnly: true
+        default: SubStatement
+      actor:
+        $ref: "#/definitions/AgentGroup"
+      verb:
+        $ref: "#/definitions/Verb"
+      objectActivity:
+        $ref: "#/definitions/Activity"
+      objectAgentGroup:
+        $ref: "#/definitions/AgentGroup"
+      objectStatementReference:
+        $ref: "#/definitions/StatementReference"
+      result:
+        $ref: "#/definitions/Result"
+      context:
+        $ref: "#/definitions/Context"
+    required:
+      - actor
+      - verb
+      - objectActivity
+      - objectAgentGroup
+      - objectStatementReference
+  Verb:
+    description: 'https://github.com/adlnet/xAPI-Spec/blob/1.0.2/xAPI.md#413-verb'
+    type: object
+    properties:
+      id:
+        type: string
+      display:
+        type: object
+        additionalProperties:
+          type: string
+    required:
+      - id

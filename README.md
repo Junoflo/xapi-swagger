@@ -9,9 +9,9 @@ The xAPI specification is very large and can be confusing to work with at first.
 This repository is a work in progress and will continue to evolve based on updates to the spec.
 
 # Usage
-It is fairly easy to get started with xAPI Swagger. Using the [Swagger UI](), you can easily visualize the xAPI speciation
+It is fairly easy to get started with xAPI Swagger. Using the [Swagger UI](http://editor.swagger.io/#/), you can easily visualize the xAPI speciation
 
-1. Goto [Swagger UI]()
+1. Goto [Swagger UI](http://editor.swagger.io/#/)
 2. Import the xapi-swagger.yaml file
 3. Explore!
 
